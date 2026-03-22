@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Golf">
+<title>Golf Status</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'Segoe UI', sans-serif; background: #0a1a0e; color: #e8efe8; min-height: 100vh; padding: env(safe-area-inset-top, 16px) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 16px) env(safe-area-inset-left, 0); }
+.container { max-width: 480px; margin: 0 auto; padding: 24px 16px; }
+h1 { color: #8abf8a; font-size: 1em; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+h2 { color: #8abf8a; font-size: 0.75em; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; margin-top: 20px; }
+.grid4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-bottom: 4px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px; }
+.card { background: #122018; border: 1px solid #2d5a38; border-radius: 12px; padding: 14px 8px; text-align: center; }
+.val { font-size: 2.4em; font-weight: 800; line-height: 1; }
+.val-sm { font-size: 1.8em; font-weight: 800; line-height: 1; }
+.lbl { color: #8abf8a; font-size: 0.68em; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 6px; line-height: 1.3; }
+.calc { background: #122018; border: 1px solid #2d5a38; border-radius: 12px; padding: 18px; margin-top: 20px; }
+select, input[type=number] { width: 100%; background: #0a1a0e; border: 1px solid #2d5a38; border-radius: 8px; color: #e8efe8; padding: 13px 12px; font-size: 1em; margin-bottom: 12px; -webkit-appearance: none; appearance: none; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.field label { display: block; color: #8abf8a; font-size: 0.75em; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 5px; }
+.target { text-align: center; background: #0a2a10; border: 1px solid #2d7a3e; border-radius: 10px; padding: 18px; margin-top: 4px; }
+.target-num { font-size: 4em; font-weight: 800; color: #5cb86e; line-height: 1; }
+.target-lbl { color: #8abf8a; font-size: 0.8em; margin-top: 6px; }
+.updated { color: #3a5a3a; font-size: 0.7em; text-align: center; margin-top: 24px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Golf Status</h1>
+
+<h2>VD Match — 2026-03-04</h2>
+<div class="grid4">
+  <div class="card">
+    <div class="val" style="color:#e87a5c">-6</div>
+    <div class="lbl">Standing</div>
+  </div>
+  <div class="card">
+    <div class="val-sm" style="color:#e8d44d">0.0</div>
+    <div class="lbl">5-Rnd SMA</div>
+  </div>
+  <div class="card">
+    <div class="val" style="color:#5cb86e">1</div>
+    <div class="lbl">Strokes<br>D gets</div>
+  </div>
+  <div class="card">
+    <div class="val" style="color:#e87a5c">V</div>
+    <div class="lbl">Honor</div>
+  </div>
+</div>
+
+<h2>Handicap</h2>
+<div class="grid2">
+  <div class="card">
+    <div class="val" style="color:#e8d44d">14.7</div>
+    <div class="lbl">Index</div>
+  </div>
+  <div class="card">
+    <div class="val" style="color:#f5d06a">16.5</div>
+    <div class="lbl">Bubble Diff</div>
+  </div>
+</div>
+
+<div class="calc">
+  <h2 style="margin-top:0">Target Score</h2>
+  <select id="course-sel" onchange="onCourse()">
+    <option value="">— select course —</option><option value="Lakes to Foothills" data-rating="69.9" data-slope="131">Lakes to Foothills</option><option value="Mountain to Lakes" data-rating="69.0" data-slope="130">Mountain to Lakes</option><option value="Foothills to Mountain" data-rating="69.3" data-slope="131">Foothills to Mountain</option><option value="Lakes" data-rating="69.6" data-slope="129">Lakes</option><option value="Foothills" data-rating="69.6" data-slope="130">Foothills</option><option value="Lakes to Foothills Blue" data-rating="71.9" data-slope="135">Lakes to Foothills Blue</option><option value="Debordieu III" data-rating="71.7" data-slope="141">Debordieu III</option><option value="Heritage Club" data-rating="71.6" data-slope="133">Heritage Club</option><option value="Mountain to Foothills" data-rating="69.6" data-slope="126">Mountain to Foothills</option><option value="Holliday Farms Blue" data-rating="71.0" data-slope="143">Holliday Farms Blue</option><option value="Foothills to Mountain Blu" data-rating="71.2" data-slope="134">Foothills to Mountain Blu</option><option value="New Smyrna Golf Club" data-rating="69.6" data-slope="123">New Smyrna Golf Club</option><option value="The Ridge" data-rating="68.9" data-slope="130">The Ridge</option><option value="Raccoon Creek" data-rating="69.7" data-slope="129">Raccoon Creek</option><option value="Meadow Hills" data-rating="69.1" data-slope="123">Meadow Hills</option><option value="Foothills to Foothills" data-rating="70.2" data-slope="132">Foothills to Foothills</option><option value="Mountain Mountain" data-rating="68.4" data-slope="130">Mountain Mountain</option><option value="Preserve at Jordan Lake" data-rating="70.0" data-slope="128">Preserve at Jordan Lake</option>
+  </select>
+  <div class="row2">
+    <div class="field">
+      <label>Rating</label>
+      <input type="number" id="rating" step="0.1" placeholder="72.1" inputmode="decimal" oninput="calc()">
+    </div>
+    <div class="field">
+      <label>Slope</label>
+      <input type="number" id="slope" placeholder="128" inputmode="numeric" oninput="calc()">
+    </div>
+  </div>
+  <div class="field">
+    <label>PCC (optional)</label>
+    <input type="number" id="pcc" step="0.1" placeholder="0" inputmode="decimal" oninput="calc()">
+  </div>
+  <div class="target" id="target-card" style="display:none">
+    <div class="target-num" id="target-num">—</div>
+    <div class="target-lbl">or better (adj score) to beat bubble of <strong style="color:#f5d06a">16.5</strong></div>
+  </div>
+</div>
+
+<div class="updated">Updated 3/22/2026 8:52 AM</div>
+</div>
+
+<script>
+const BUBBLE = 16.5;
+function onCourse() {
+  const sel = document.getElementById('course-sel');
+  const opt = sel.options[sel.selectedIndex];
+  const r = opt.getAttribute('data-rating');
+  const s = opt.getAttribute('data-slope');
+  if (r) document.getElementById('rating').value = r;
+  if (s) document.getElementById('slope').value = s;
+  calc();
+}
+function calc() {
+  const rating = parseFloat(document.getElementById('rating').value);
+  const slope  = parseFloat(document.getElementById('slope').value);
+  const pcc    = parseFloat(document.getElementById('pcc').value) || 0;
+  const card   = document.getElementById('target-card');
+  if (!rating || !slope || BUBBLE === null) { card.style.display = 'none'; return; }
+  const adj = Math.floor((BUBBLE - 0.1 + pcc) * slope / 113 + rating);
+  document.getElementById('target-num').textContent = adj;
+  card.style.display = 'block';
+}
+</script>
+</body>
+</html>
